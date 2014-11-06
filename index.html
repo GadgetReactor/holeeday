@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- Basic Page Needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Holeeday</title>
+	<meta name="description" content="Counter to your next awesome Holiday!">
+	<meta name="author" content="Sean - seanseah.github.io">
+
+   <!-- Mobile Specific Metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+    ================================================== -->
+	<link rel="stylesheet" href="css/default.css">
+	<link rel="stylesheet" href="css/layout.css">
+	<link rel="stylesheet" href="css/media-queries.css">    
+
+   <!-- Script
+   ================================================== -->
+	<script src="js/modernizr.js"></script>
+
+   <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.png" >
+
+	<style>
+		
+	.j {
+		background-image: url(http://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/zero/1x/ic_zero_inbox.png);
+		background-size: 228px 309px;
+		height: 309px;
+		width: 228px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%);
+		z-index:-1;
+	}
+
+	</style>	
+	
+</head>
+
+<body>
+
+	<div id="preloader">      
+      <div id="status">
+         <img src="images/preloader.gif" height="64" width="64" alt="">
+      </div>
+   </div>
+
+   <!-- Intro Section
+   ================================================== -->
+   <section id="intro">
+
+   	<header class="row">	 
+
+			<div id="logo" >
+				<a href="http://seanseah.github.io" >
+                 <img src="images/logo.png" alt="SS">                  
+              </a>					
+			</div>
+
+		   <nav id="nav-wrap">
+
+		      <a class="menu-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+			   <a class="menu-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+		      <ul id="nav" class="nav">
+		         <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
+		         <li><a class="smoothscroll" href="#about">About</a></li>			         
+			     <li><a class="smoothscroll" href="#countrySelect">Country Select</a></li>
+		      </ul> <!-- end #nav -->
+
+		   </nav> <!-- end #nav-wrap --> 	        
+
+   	</header> <!-- Header End -->   	
+
+   	<div  id="main" class="row">
+
+	   	<div class="twelve columns">
+	   			
+	   		<h1>Time left till your next Holiday!</h1>
+
+			<div id="address"></div>
+			<div id="details"></div>
+			<div id="details2"></div>			
+	   		<h5>Time Left</h5>
+
+	   		<div id="counter" class="cf">
+	   			<span>34 <em>days</em></span> 
+ 					<span>12 <em>hours</em></span>
+					<span>50 <em>minutes</em></span>
+ 					<span>33 <em>seconds</em></span> 
+   			</div>					
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+	         <ul class="social">
+	            <li><a href="http://www.facebook.com/gadgetreactor/"><i class="fa fa-facebook"></i></a></li>
+	            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+	            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+	            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+	            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+			<div class="j"></div>
+
+         </div> 
+
+      </div> <!-- main end -->    	
+
+   </section> <!-- end intro section -->
+
+
+   <!-- About Section
+   ================================================== -->
+   <section id="about">
+
+      <div class="row section-header">
+
+      	<div class="twelve columns">	
+
+      		<div class="icon-wrap">
+            	<i class="fa fa-gamepad"></i>
+         	</div>
+
+	         <h1>About Holeeday.</h1>
+
+	         <p class="lead">
+			 Aren't public holidays just awesome? It's extra special if it falls on a Friday or Monday for the super long weekend. 
+			 Perfect for planning a quick getaway. Holeeday is a tool to help you cope while waiting for the next holiday. It automatically
+			 countdown to the next public holiday based on your country location. 
+			 </p>
+         </div>
+
+      	<div class="twelve columns">	
+
+      		<div class="icon-wrap" id="countrySelect">
+            	<i class="fa fa-refresh"></i>
+         	</div>
+
+	         <h1>Problems?</h1>
+
+	         <p class="lead">
+			 Did I detect your country correctly? 
+			 Otherwise click here to select your countries. Only those in the list are available.
+			 </p>
+			 <select id="countrySelector">
+			 </select>
+         </div>		 
+		 
+      </div> <!-- end section-header -->             	
+
+      <div class="row section-header">
+
+      	<div class="twelve columns">	
+
+      		<div class="icon-wrap">
+            	<i class="fa fa-gamepad"></i>
+         	</div>
+
+	         <h1>Fork Me on GitHub.</h1>
+
+	         <p class="lead">
+				 Concept, design, and code for Holeeday was done by Sean Seah. Theme layout is mainly attributed to Styleshout 
+				 and in addition, Holeeday uses APIs from Google (Calendar V3) and Telize for IP Geolocation purposes.
+				 Please feel free to fork this project on GitHub.			 
+			 </p>
+			 <div id="call-to-action">
+				<div class="action">
+			         <a href="mailto:info@gadgetreactor.com" class="button">Contact Me</a>
+	         	</div>
+			 </div>
+         </div>		 
+		 
+      </div> <!-- end section-header -->   	  
+
+   </section> <!-- About Section End-->    
+
+   <!-- footer
+   ================================================== -->
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">            
+
+            <ul class="copyright">
+               <li>&copy; Copyright 2014 Sean Seah</li>
+               <li>Design with GadgetReactor</a></li>          
+            </ul>
+
+         </div>          
+
+      </div>
+
+      <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#intro"><i class="icon-up-open"></i></a></div>
+
+   </footer> <!-- Footer End-->   
+
+   <!-- Java Script
+   ================================================== -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+
+   <script src="js/jquery.countdown.js"></script>
+   <script src="js/jquery.placeholder.js"></script>
+   <script src="js/backstretch.js"></script>  
+   <script src="js/init.js"></script>
+   
+</body>
+
+</html>
