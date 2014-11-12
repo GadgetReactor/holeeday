@@ -156,9 +156,9 @@ ul#nav li a {
    transition: color .2s ease-in-out;
 }  
 
-ul#nav li a:hover { color: #1E732D; }
+ul#nav li a:hover { color: #1E90FF; }
 ul#nav li a:active { background-color: transparent !important; }
-ul#nav li.current a { color: #1E732D; }
+ul#nav li.current a { color: #1E90FF; }
 
 
 /* Main 
@@ -195,6 +195,9 @@ ul#nav li.current a { color: #1E732D; }
 	text-shadow: 0px 1px 2px rgba(0, 0, 0, .7);	
 }
 
+#main a { color: #fff; }
+#main a:hover { color: #1E90FF; }
+
 /* counter */
 #main #counter {
 	width: 75%;
@@ -223,50 +226,6 @@ ul#nav li.current a { color: #1E732D; }
 	text-shadow: 0px 1px 2px rgba(0, 0, 0, .7);	
 }
 
-/* mailchimp form */
-#main #mc_embed_signup {
-	clear: both;
-	margin: 48px auto 18px;
-	width: 50%;	
-}
-#main #mc_embed_signup:before,
-#main #mc_embed_signup:after {
-    content: " ";
-    display: table;
-}
-#main #mc_embed_signup:after {
-    clear: both;
-}
-
-#main #mc_embed_signup input {
-	display: inline-block;
-	float: left;
-}
-#main #mc_embed_signup input[type="email"] {	
-	font-size: 15px;
-	height: 54px;
-	line-height: 30px;
-	padding: 12px 15px;
-	border-radius: 3px 0 0 3px;	
-	background: #727272;
-	background: rgba(255, 255, 255, .2);	
-	width: 70%;
-}
-#main #mc_embed_signup input[type="submit"] {
-	font-size: 15px;
-	line-height: 30px;
-	height: 54px;
-	padding: 12px 30px;
-	margin: 0 0 18px 0;
-	border-radius: 0 3px 3px 0;	
-	background: #197C28;
-	background: rgba(25, 124, 40, 1);	
-	width: 30%;	
-}
-#main #mc_embed_signup input[type="submit"]:hover {
-	background: #146320;
-}
-
 /* social links */
 #main .social {
 	clear: both;
@@ -281,7 +240,7 @@ ul#nav li.current a { color: #1E732D; }
    padding: 0;
 }
 #main .social li a { color: #fff; }
-#main .social li a:hover { color: #197C28; }
+#main .social li a:hover { color: #1E90FF; }
 
 
 /* ------------------------------------------------------------------ */
@@ -376,56 +335,6 @@ ul#nav li.current a { color: #1E732D; }
 #call-to-action .button:active {
    background: #FFFFFF;
    color: #0D0D0D !important;
-}
-
-
-/* ------------------------------------------------------------------ */
-/* d. Location Section
-/* ------------------------------------------------------------------ */
-
-#location .contacts {
-	background: #1F1F1F;   
-	padding-top: 48px;
-   padding-bottom: 18px;   
-}
-#location .contact-details {
-	max-width: 900px;	
-	text-align: center;
-}
-#location .contacts .row .columns {	width: 33.33333%; }
-#location .contacts .row .end { float: left; }
-#location .contacts h3 {
-   font: 14px/24px 'montserrat-bold', sans-serif;
-   color: #fff;
-   text-transform: uppercase;
-   letter-spacing: 1.5px;   
-   margin-bottom: 6px;
-}
-#location .contacts p {	
-   line-height: 30px;
-   font-family: 'montserrat-regular', sans-serif;
-   font-size: 14px;
-   color: #6C6C6C;
-}
-#location .contacts h3 i {	margin-right: 8px; }
-
-/* map */
-#map {
-   display: block;
-	height: 486px;
-   width: 100%;
-   background-color: #F6F4EF;
-}
-#map img { max-width:inherit !important; }
-#map .map-error {
-  text-align: center;
-  padding-top: 48px;
-  color: #C0B491;
-  font-size: 14px;
-}
-#map .fa {
-	font-size: 60px;
-	color: #1F1F1F;
 }
 
 

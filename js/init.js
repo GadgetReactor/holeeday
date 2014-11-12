@@ -109,9 +109,21 @@ jQuery(document).ready(function($) {
 		return output;
 	}
 	var nextDate = "2015-01-01";
-	var country = "Singapore"; // default is Singapore
+	var country_name = "Singapore"; // default is Singapore
 	var country_code= "SG";
-	var countryDict = {	"SG":"Singapore","US":"USA","CN":"China","AD":"Andorra","AE":"UAE","AF":"afghanistan","AR":"ar","AU":"australia",
+	var countryDict = {	"SG":"Singapore","US":"United States","CN":"China","AD":"Andorra","AE":"United Arab Emirates","AF":"Afghanistan","AR":"Argentina","AU":"Australia",
+						"BA":"Bosnia and Herzegovina", "BE":"Belgium", "BG": "Bulgaria", "BN":"Brunei","BR":"Brazil","CA":"Canada","CH":"Switzerland",
+						"CL":"Chile", "CO":"Colombia", "CR":"Costa Rica", "CZ":"Czech Republic", "DE":"Germany", "DK":"Denmark", "DZ":"Algeria", "EC":"Ecuador", 
+						"IN":"India", "MY":"Malaysia", "EG":"Egypt", "ES":"Spain", "FI":"Finland", "FR":"France", "GB": "United Kingdom", "GH":"Ghana",
+						"GR":"Greece", "HK":"Hong Kong", "HR":"Croatia", "ID":"Indonesia", "IE":"Ireland", "IL":"Israel", "IQ":"Iraq", "IR":"Iran", 
+						"IS":"Iceland", "IT":"Italy", "JM":"Jamaica", "JP":"Japan", "KG":"Kyrgyzstan", "KH":"Cambodia", "KR":"South Korea",
+						"LA":"Laos", "LK":"Sri Lanka", "MA":"Morocco", "MC":"Monaco", "MM":"Myanmar", "MX":"Mexico", "NL":"Netherlands", "NO":"Norway",
+						"NP":"Nepal", "NZ":"New Zealand",
+						"RU":"Russia",
+															
+	};
+	
+	var googleDict = {	"SG":"Singapore","US":"USA","CN":"China","AD":"Andorra","AE":"UAE","AF":"afghanistan","AR":"ar","AU":"australia",
 						"BA":"bosniaandherzegovina", "BE":"belgium", "BG": "bulgaria", "BN":"brunei","BR":"brazilian","CA":"canadian","CH":"switzerland",
 						"CL":"chile", "CO":"colombia", "CR":"costarica", "CZ":"czech", "DE":"German", "DK":"Denmark", "DZ":"Algeria", "EC":"Ecuador", 
 						"IN":"indian", "MY":"Malaysia", "EG":"egypt", "ES":"spain", "FI":"finland", "FR":"france", "GB": "United Kingdom", "GH":"Ghana",
@@ -121,7 +133,7 @@ jQuery(document).ready(function($) {
 						"NP":"Nepal", "NZ":"newzealand",
 						"RU":"russian",
 															
-	};
+	};	
 	
 	for (var key in countryDict) {
 		$('#countrySelector').append(
@@ -132,44 +144,66 @@ jQuery(document).ready(function($) {
 	$('select').change(function () {
 		var optionSelected = $(this).find("option:selected");
 		country_code  = optionSelected.val();
-		country   	  = optionSelected.text();
+		country_name  = optionSelected.text();
 		$("#details").html();
 		getNextHoliday();
 		$('html, body').animate({ scrollTop: 0 }, 'slow');
 	});	
 	
-	var jxqhr = $.get("http://www.telize.com/geoip", function (response) {
-		$("#ip").html("IP: " + response.ip);
-		country = response.country;
-		country_code = response.country_code;		
+	var jxqhr = $.get("https://freegeoip.net/json/", function (response) {
+		country_name = response.country_name;
+		country_code = response.country_code;
 	}, "jsonp");
 	jxqhr.complete(getNextHoliday);
 
 	function getNextHoliday() {
-		$("#address").html("<p>Looks like you are from ... " + country + "(" + country_code +")</p>");
+		$("#address").html(	"<p>Looks like you are from ... <a class='smoothscroll' href='#countrySelect'>"
+							+ country_name + "(" + country_code +")</a></p>");
 
-		googleCountry = countryDict[country_code];		
-		$.get("https://www.googleapis.com/calendar/v3/calendars/en."+googleCountry+"%23holiday%40group.v.calendar.google.com/events?singleEvents=true&key=AIzaSyACSxVDhiubNZPZCgcrtvELI2vLeldstDk&orderBy=startTime&timeMin=2014-11-05T00:00:00Z&timeMax=2014-12-31T23:59:59Z", function (response2) {
-			$("#details").html(	"<p>The next holiday will be</p><p><span>"+response2.items[0].summary + 
-								"</span></p><p>That's going to be on " + response2.items[0].start.date + " followed by " + response2.items[1].summary
-								+ " (" + response2.items[1].start.date + ")</p>"
-			);
-
-			var d = new Date();
+		var currentdate = new Date(); 
+		var todaydate = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-" 
+                + (currentdate.getDate());				
+		var todaytime = "T"+currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds() + "Z";
+							
+		googleCountry = googleDict[country_code];		
+		$.get("https://www.googleapis.com/calendar/v3/calendars/en."+googleCountry+"%23holiday%40group.v.calendar.google.com/events?singleEvents=true&key=AIzaSyACSxVDhiubNZPZCgcrtvELI2vLeldstDk&orderBy=startTime&timeMin="+todaydate+todaytime+"&timeMax="+ currentdate.getFullYear() +"-12-31T23:59:59Z", function (response2) {
+			
 			nextDate = response2.items[0].start.date;
-			var finalDate =nextDate;
 
-			$('div#counter').countdown(finalDate)
-			.on('update.countdown', function(event) {
+			if (nextDate == todaydate) {
+				$('div#counter').countdown(nextDate)
+				.on('stop.countdown', function(event) {
+				});
+				$("#details").html(	"<p>The next holiday is</p><p><span>"+response2.items[0].summary + 
+									"</span></p><p>That's TODAY, followed by " + response2.items[1].summary
+									+ " on " + response2.items[1].start.date + ". What are you doing checking this? Go out and have fun!</p>"
+				);
 
-				$(this).html(event.strftime('<span>%D <em>days</em></span>' + 
-													 '<span>%H <em>hours</em></span>' + 
-													 '<span>%M <em>minutes</em></span>' +
-													 '<span>%S <em>seconds</em></span>'));
+				$('div#counter').html('<span>0 <em>days</em></span>' + 
+						'<span>0 <em>hours</em></span>' + 
+						'<span>0 <em>minutes</em></span>' +
+						'<span>0 <em>seconds</em></span>');				
+				} else {
+				$("#details").html(	"<p>The next holiday will be</p><p><span>"+response2.items[0].summary + 
+									"</span></p><p>That's going to be on " + response2.items[0].start.date + ", followed by " + response2.items[1].summary
+									+ " on " + response2.items[1].start.date + ". Have you made plans yet?</p>"
+				);
 
-		   }); 
-			var day = d.getDate();
-		}, "jsonp");			
+				$('div#counter').countdown(nextDate)
+				.on('update.countdown', function(event) {
+
+					$(this).html(event.strftime('<span>%D <em>days</em></span>' + 
+														 '<span>%H <em>hours</em></span>' + 
+														 '<span>%M <em>minutes</em></span>' +
+														 '<span>%S <em>seconds</em></span>'));
+
+			   }); 
+			};
+		}, "jsonp");
+		
 	}	
 
 /*----------------------------------------------------*/
