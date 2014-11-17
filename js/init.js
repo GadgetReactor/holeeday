@@ -111,28 +111,36 @@ jQuery(document).ready(function($) {
 	var nextDate = "2015-01-01";
 	var country_name = "Singapore"; // default is Singapore
 	var country_code= "SG";
-	var countryDict = {	"SG":"Singapore","US":"United States","CN":"China","AD":"Andorra","AE":"United Arab Emirates","AF":"Afghanistan","AR":"Argentina","AU":"Australia",
-						"BA":"Bosnia and Herzegovina", "BE":"Belgium", "BG": "Bulgaria", "BN":"Brunei","BR":"Brazil","CA":"Canada","CH":"Switzerland",
-						"CL":"Chile", "CO":"Colombia", "CR":"Costa Rica", "CZ":"Czech Republic", "DE":"Germany", "DK":"Denmark", "DZ":"Algeria", "EC":"Ecuador", 
-						"IN":"India", "MY":"Malaysia", "EG":"Egypt", "ES":"Spain", "FI":"Finland", "FR":"France", "GB": "United Kingdom", "GH":"Ghana",
-						"GR":"Greece", "HK":"Hong Kong", "HR":"Croatia", "ID":"Indonesia", "IE":"Ireland", "IL":"Israel", "IQ":"Iraq", "IR":"Iran", 
-						"IS":"Iceland", "IT":"Italy", "JM":"Jamaica", "JP":"Japan", "KG":"Kyrgyzstan", "KH":"Cambodia", "KR":"South Korea",
-						"LA":"Laos", "LK":"Sri Lanka", "MA":"Morocco", "MC":"Monaco", "MM":"Myanmar", "MX":"Mexico", "NL":"Netherlands", "NO":"Norway",
+	
+/*----------------------------------------------------*/
+/*	calendar data and matching code for Google Calendar
+------------------------------------------------------*/
+	
+	var countryDict = {	"AL":"Albania", "AD":"Andorra","AR":"Argentina","AM":"Armenia", "AU":"Australia",
+						"AT":"Austria",
+						"BA":"Bosnia and Herzegovina", "BE":"Belgium", "BG": "Bulgaria", "BN":"Brunei","BR":"Brazil","CA":"Canada",
+						"KH":"Cambodia", "CL":"Chile", "CN":"China", "CO":"Colombia", "CR":"Costa Rica", "HR":"Croatia", "CZ":"Czech Republic", "DK":"Denmark", "EC":"Ecuador", 
+						"EG":"Egypt", "FI":"Finland", "FR":"France", "GH":"Ghana",
+						"GR":"Greece", "DE":"Germany", "HK":"Hong Kong", "ID":"Indonesia", "IE":"Ireland", "IL":"Israel", "IQ":"Iraq", "IR":"Iran", 
+						"IS":"Iceland", "IN":"India", "IT":"Italy", "JM":"Jamaica", "JP":"Japan", "KG":"Kyrgyzstan",  
+						"LA":"Laos", "MY":"Malaysia", "MX":"Mexico", "MA":"Morocco", "MC":"Monaco", "MM":"Myanmar", "NL":"Netherlands", "NO":"Norway",
 						"NP":"Nepal", "NZ":"New Zealand",
+						"SG":"Singapore", "ES":"Spain", "KR":"South Korea", "LK":"Sri Lanka", "CH":"Switzerland",
 						"RU":"Russia",
+						"TW":"Taiwan", "TH":"Thailand", "TR":"Turkey", "AE":"United Arab Emirates", "GB": "United Kingdom", "US":"United States", "UY":"Uruguay", "VN":"Vietnam",
 															
 	};
 	
-	var googleDict = {	"SG":"Singapore","US":"USA","CN":"China","AD":"Andorra","AE":"UAE","AF":"afghanistan","AR":"ar","AU":"australia",
-						"BA":"bosniaandherzegovina", "BE":"belgium", "BG": "bulgaria", "BN":"brunei","BR":"brazilian","CA":"canadian","CH":"switzerland",
-						"CL":"chile", "CO":"colombia", "CR":"costarica", "CZ":"czech", "DE":"German", "DK":"Denmark", "DZ":"Algeria", "EC":"Ecuador", 
-						"IN":"indian", "MY":"Malaysia", "EG":"egypt", "ES":"spain", "FI":"finland", "FR":"france", "GB": "United Kingdom", "GH":"Ghana",
-						"GR":"Greece", "HK":"Hongkong", "HR":"Croatia", "ID":"Indonesia", "IE":"Ireland", "IL":"Israel", "IQ":"Iraq", "IR":"Iran", 
-						"IS":"Iceland", "IT":"Italy", "JM":"Jamaica", "JP":"Japan", "KG":"Kyrgyzstan", "KH":"Cambodia", "KR":"southkorea",
-						"LA":"Laos", "LK":"srilanka", "MA":"Morocco", "MC":"Monaco", "MM":"Myanmar", "MX":"Mexico", "NL":"Netherlands", "NO":"Norway",
-						"NP":"Nepal", "NZ":"newzealand",
+	var googleDict = {	"SG":"Singapore","US":"USA","CN":"China","AD":"AD","AR":"ar","AM":"AM","AU":"australian","AT":"austrian",
+						"BA":"BA", "BE":"BE", "BG": "bulgarian", "BN":"BN","BR":"brazilian","CA":"canadian","CH":"CH",
+						"CL":"CL", "CO":"CO", "CR":"CR", "CZ":"czech", "DE":"German", "DK":"Danish", "DZ":"DZ", "EC":"EC", 
+						"IN":"indian", "MY":"Malaysia", "EG":"EG", "ES":"spain", "FI":"finnish", "FR":"french", "GB": "UK", "GH":"Gh",
+						"GR":"Greek", "HK":"hong_kong", "HR":"Croatian", "ID":"Indonesian", "IE":"Irish", "IL":"jewish", "IQ":"IQ", "IR":"IR", 
+						"IS":"IS", "IT":"italian", "JM":"JM", "JP":"japanese", "KG":"Kg", "KH":"KH", "KR":"south_korea",
+						"LA":"LA", "LK":"lk", "MA":"MA", "MC":"MC", "MM":"MM", "MX":"Mexican", "NL":"Dutch", "NO":"Norwegian",
+						"NP":"Np", "NZ":"new_zealand","AE":"AE",
 						"RU":"russian",
-															
+						"TW":"Taiwan", "TH":"TH", "TR":"Turkish", "UY":"UY", "VN":"Vietnamese",															
 	};	
 	
 	for (var key in countryDict) {
@@ -140,7 +148,8 @@ jQuery(document).ready(function($) {
 						$("<option></option>").text(countryDict[key]).val(key)
 					);		
 	}	
-
+	$("#countrySelector").val(country_code);
+	
 	$('select').change(function () {
 		var optionSelected = $(this).find("option:selected");
 		country_code  = optionSelected.val();
@@ -169,7 +178,7 @@ jQuery(document).ready(function($) {
                 + currentdate.getSeconds() + "Z";
 							
 		googleCountry = googleDict[country_code];		
-		$.get("https://www.googleapis.com/calendar/v3/calendars/en."+googleCountry+"%23holiday%40group.v.calendar.google.com/events?singleEvents=true&key=AIzaSyACSxVDhiubNZPZCgcrtvELI2vLeldstDk&orderBy=startTime&timeMin="+todaydate+todaytime+"&timeMax="+ currentdate.getFullYear() +"-12-31T23:59:59Z", function (response2) {
+		$.get("https://www.googleapis.com/calendar/v3/calendars/en."+googleCountry+"%23holiday%40group.v.calendar.google.com/events?singleEvents=true&key=AIzaSyACSxVDhiubNZPZCgcrtvELI2vLeldstDk&orderBy=startTime&timeMin="+todaydate+todaytime+"&timeMax="+ currentdate.getFullYear()+1 +"-12-31T23:59:59Z", function (response2) {
 			
 			nextDate = response2.items[0].start.date;
 
@@ -186,7 +195,7 @@ jQuery(document).ready(function($) {
 						'<span>0 <em>hours</em></span>' + 
 						'<span>0 <em>minutes</em></span>' +
 						'<span>0 <em>seconds</em></span>');				
-				} else {
+			} else {
 				$("#details").html(	"<p>The next holiday will be</p><p><span>"+response2.items[0].summary + 
 									"</span></p><p>That's going to be on " + response2.items[0].start.date + ", followed by " + response2.items[1].summary
 									+ " on " + response2.items[1].start.date + ". Have you made plans yet?</p>"
