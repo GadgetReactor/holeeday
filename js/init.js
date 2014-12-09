@@ -158,16 +158,30 @@ jQuery(document).ready(function($) {
 		getNextHoliday();
 		$('html, body').animate({ scrollTop: 0 }, 'slow');
 	});	
-	
-	var jxqhr = $.get("https://freegeoip.net/json/", function (response) {
-		country_name = response.country_name;
-		country_code = response.country_code;
-	}, "jsonp");
-	jxqhr.complete(getNextHoliday);
+		
+	$.ajax({
+		url: "https://freegeoip.net/json/",
+		error: function(){
+			country_name = "Singapore";
+			country_code = "SG";
+			getNextHoliday();
+			$("#address").html(	"<p>We could not detect where you are from and have set it as  <a class='smoothscroll' href='#countrySelect'>"
+							+ country_name + "(" + country_code +") (click to change)</a></p>");
+			
+
+		},
+		success: function(response){
+			country_name = response.country_name;
+			country_code = response.country_code;
+			getNextHoliday();
+			$("#address").html(	"<p>Looks like you are from ... <a class='smoothscroll' href='#countrySelect'>"
+							+ country_name + "(" + country_code +")</a></p>");
+			
+		},
+		timeout: 3000 // sets timeout to 3 seconds
+	});		
 
 	function getNextHoliday() {
-		$("#address").html(	"<p>Looks like you are from ... <a class='smoothscroll' href='#countrySelect'>"
-							+ country_name + "(" + country_code +")</a></p>");
 
 		var currentdate = new Date(); 
 		var todaydate = currentdate.getFullYear() + "-"
