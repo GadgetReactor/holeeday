@@ -156,6 +156,9 @@ jQuery(document).ready(function($) {
 		country_name  = optionSelected.text();
 		$("#details").html();
 		getNextHoliday();
+		$("#address").html(	"<p>We have pre-selected  <a class='smoothscroll' href='#countrySelect'>"
+							+ country_name + "(" + country_code +") (click to change)</a></p>");
+		
 		$('html, body').animate({ scrollTop: 0 }, 'slow');
 	});	
 		
