@@ -163,7 +163,7 @@ jQuery(document).ready(function($) {
 	});	
 		
 	$.ajax({
-		url: "https://freegeoip.net/json/",
+		url: "http://www.telize.com/geoip",
 		error: function(){
 			country_name = "Singapore";
 			country_code = "SG";
@@ -174,7 +174,7 @@ jQuery(document).ready(function($) {
 
 		},
 		success: function(response){
-			country_name = response.country_name;
+			country_name = response.country;
 			country_code = response.country_code;
 			getNextHoliday();
 			$("#address").html(	"<p>Looks like you are from ... <a class='smoothscroll' href='#countrySelect'>"
@@ -207,6 +207,8 @@ jQuery(document).ready(function($) {
 									"</span></p><p>That's TODAY, followed by " + response2.items[1].summary
 									+ " on " + response2.items[1].start.date + ". What are you doing checking this? Go out and have fun!</p>"
 				);
+				
+				
 
 				$('div#counter').html('<span>0 <em>days</em></span>' + 
 						'<span>0 <em>hours</em></span>' + 
