@@ -2,7 +2,7 @@
 /*
 /* Init JS
 /*
------------------------------------------------------------------------------------*/
+-----------------------------------------------------------------------------------*/i
 
 jQuery(document).ready(function($) {
 
@@ -174,8 +174,8 @@ jQuery(document).ready(function($) {
 
 		},
 		success: function(response){
-			country_name = response.country;
-			country_code = response.country_code;
+			country_name = response.ip.country;
+			country_code = response.ip.country_code;
 			getNextHoliday();
 			$("#address").html(	"<p>Looks like you are from ... <a class='smoothscroll' href='#countrySelect'>"
 							+ country_name + "(" + country_code +")</a></p>");
@@ -227,7 +227,7 @@ jQuery(document).ready(function($) {
 														 '<span>%H <em>hours</em></span>' + 
 														 '<span>%M <em>minutes</em></span>' +
 														 '<span>%S <em>seconds</em></span>'));
-
+e
 			   }); 
 			};
 		}, "jsonp");
