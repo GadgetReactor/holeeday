@@ -163,7 +163,7 @@ jQuery(document).ready(function($) {
 	});	
 		
 	$.ajax({
-		url: "http://www.telize.com/geoip",
+		url: "https://ip.nf/me.json",
 		error: function(){
 			country_name = "Singapore";
 			country_code = "SG";
