@@ -227,7 +227,7 @@ jQuery(document).ready(function($) {
 														 '<span>%H <em>hours</em></span>' + 
 														 '<span>%M <em>minutes</em></span>' +
 														 '<span>%S <em>seconds</em></span>'));
-e
+
 			   }); 
 			};
 		}, "jsonp");
